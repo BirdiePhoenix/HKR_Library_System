@@ -1,0 +1,9 @@
+#ifndef ERROR_HANDLING_H
+#define ERROR_HANDLING_H
+#include <iostream>
+#include <limits>
+
+int intChecker();
+void clearBuffer();
+
+#endif
