@@ -19,11 +19,17 @@ void Book::displayDetails(){
 }
 
 void Book::borrowBook(){
-
+    if(mIsAvailable){
+        mIsAvailable = false;
+        displayDetails();
+    }
+    else    
+        std::cout << mTitle << " is already borrowed." << std::endl;
 }
 
 void Book::returnBook(){
-
+    mIsAvailable = true;
+    displayDetails();
 }
 
 std::string Book::getTitle(){

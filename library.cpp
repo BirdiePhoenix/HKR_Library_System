@@ -25,11 +25,31 @@ void Library::addBook(){
 }
 
 void Library::lendABook(){
+    clearBuffer();
+        
+    std::string whatTitle;
+    std::cout << "What is the book title? ";
+    std::getline(std::cin, whatTitle);
 
+    for(int i = 0; i <= mLibrary.size() - 1; i++){
+        if(whatTitle == mLibrary[i].getTitle()){
+            mLibrary[i].borrowBook();
+        }
+    }
 }
 
 void Library::returnABook(){
+    clearBuffer();
+        
+    std::string whatTitle;
+    std::cout << "What book do you want to return? ";
+    std::getline(std::cin, whatTitle);
 
+    for(int i = 0; i <= mLibrary.size() - 1; i++){
+        if(whatTitle == mLibrary[i].getTitle()){
+            mLibrary[i].returnBook();
+        }
+    }
 }
 
 void Library::displayBooks(){
