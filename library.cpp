@@ -26,14 +26,42 @@ void Library::addBook(){
 
 void Library::lendABook(){
     clearBuffer();
-        
-    std::string whatTitle;
-    std::cout << "What is the book title? ";
-    std::getline(std::cin, whatTitle);
 
-    for(int i = 0; i <= mLibrary.size() - 1; i++){
-        if(whatTitle == mLibrary[i].getTitle()){
-            mLibrary[i].borrowBook();
+    int amountOfBooks;
+
+    do{
+        std::cout << "How many books do you want to lend out? ";
+        amountOfBooks = intChecker();
+
+        if(amountOfBooks < 1)
+            std::cout << "Amount of books can't be less than 1." << std::endl;
+
+    }while(amountOfBooks < 1);
+
+    if(amountOfBooks > 1){
+        std::vector <std::string> titlesList;
+        severalBooks(&titlesList);
+        for(int i = 0; i < titlesList.size(); i++){
+            std::cout << titlesList[i] << std::endl;
+        }
+        for(int i = 0; i < titlesList.size(); i++){
+            for(int j = 0; j < mLibrary.size(); j++){
+                if(titlesList[i] == mLibrary[j].getTitle()){
+                    mLibrary[j].borrowBook();
+                }
+            }
+        }
+    }
+    else{
+        clearBuffer();
+        std::string whatTitle;
+        std::cout << "What is the book title? ";
+        std::getline(std::cin, whatTitle);
+
+        for(int i = 0; i <= mLibrary.size() - 1; i++){
+            if(whatTitle == mLibrary[i].getTitle()){
+                mLibrary[i].borrowBook();
+            }
         }
     }
 }
@@ -41,13 +69,38 @@ void Library::lendABook(){
 void Library::returnABook(){
     clearBuffer();
         
-    std::string whatTitle;
-    std::cout << "What book do you want to return? ";
-    std::getline(std::cin, whatTitle);
+    int amountOfBooks;
 
-    for(int i = 0; i <= mLibrary.size() - 1; i++){
-        if(whatTitle == mLibrary[i].getTitle()){
-            mLibrary[i].returnBook();
+    do{
+        std::cout << "How many books do you want to return? ";
+        amountOfBooks = intChecker();
+
+        if(amountOfBooks < 1)
+            std::cout << "Amount of books can't be less than 1." << std::endl;
+
+    }while(amountOfBooks < 1);
+
+    if(amountOfBooks > 1){
+        std::vector <std::string> titlesList;
+        severalBooks(&titlesList);
+        for(int i = 0; i < titlesList.size(); i++){
+            for(int j = 0; j < mLibrary.size(); j++){
+                if(titlesList[i] == mLibrary[j].getTitle()){
+                    mLibrary[j].returnBook();
+                }
+            }
+        }
+    }
+    else{
+        clearBuffer();
+        std::string whatTitle;
+        std::cout << "What book do you want to return? ";
+        std::getline(std::cin, whatTitle);
+
+        for(int i = 0; i <= mLibrary.size() - 1; i++){
+            if(whatTitle == mLibrary[i].getTitle()){
+                mLibrary[i].returnBook();
+            }
         }
     }
 }
@@ -60,6 +113,23 @@ void Library::displayBooks(){
         }
 }
 
-void Library::severalBooks(){
+void Library::severalBooks(std::vector <std::string> *titlesList){
+    clearBuffer();
+    std::string severalTitles;
+    std::cout << "Insert the book titles, seperate them with a ';' " << std::endl;
+    std::getline(std::cin, severalTitles);
+    severalTitles.append(";");
+    
+    int listIndex = 0;
+    int wordStart = 0;
 
+    for(int i = 0; i < severalTitles.length(); i++){
+        if(severalTitles[i] == ';' || i == severalTitles.length() - 1){
+            std::string sub = severalTitles.substr(wordStart, i-wordStart);
+            titlesList->push_back(sub);
+            wordStart = i+1;
+        }
+        std::cout << "i = " << i << std::endl
+        << "wordStart = " << wordStart << std::endl;
+    }
 }

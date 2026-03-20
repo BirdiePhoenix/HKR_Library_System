@@ -12,7 +12,7 @@ class Library{
         void lendABook();
         void returnABook();
         void displayBooks();
-        void severalBooks();
+        void severalBooks(std::vector <std::string> *titlesList);
 };
 
 #endif

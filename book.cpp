@@ -11,9 +11,9 @@ void Book::displayDetails(){
     std::string printAvailable;
 
     if(mIsAvailable)
-        printAvailable = "Available";
+        printAvailable = "Yes";
     else
-        printAvailable = "Not Available";
+        printAvailable = "No";
 
     std::cout << getTitle() << "     " << getAuthor() << "     " << printAvailable << std::endl;
 }
