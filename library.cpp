@@ -133,3 +133,38 @@ void Library::severalBooks(std::vector <std::string> *titlesList){
         << "wordStart = " << wordStart << std::endl;
     }
 }
+
+void Library::loadToLibrary(std::fstream &inOutFile){
+    std::string line;
+    std::string title;
+    std::string author;
+    bool isAvailable;
+    int libraryIndex = 0;
+    while(std::getline(inOutFile, line)){
+        int lineCount = 1;
+        
+        if((lineCount+2)%3 == 0){
+            title = line;
+        }
+        else if((lineCount+1) == 0){
+            author = line;
+        }
+        else if(lineCount%3 == 0){
+            if(line == "Yes"){
+                isAvailable = true;
+            }
+            else if(line == "No"){
+                isAvailable = false;
+            }
+        }
+
+        lineCount++;
+    }
+
+    inOutFile.clear();
+    inOutFile.seekg(0);
+
+    Book newBook(title, author, isAvailable);
+    
+    mLibrary.push_back(newBook);
+}

@@ -6,9 +6,11 @@
 #include "file_manager.h"
 
 int main(){
-    checkIfOpen();
+    std::fstream inOutFile("library.txt", std::ios::in | std::ios::out);
     std::vector <Book> libraryList;
     Library myLibrary(libraryList);
+    checkIfOpen(inOutFile);
+    myLibrary.loadToLibrary(inOutFile);
     int menuChoice = 0;
 
     while(menuChoice != 5){

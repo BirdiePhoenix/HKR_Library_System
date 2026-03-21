@@ -1,6 +1,8 @@
 #ifndef LIBRARY_H
 #define LIBRARY_H
 #include <vector>
+#include <fstream>
+#include <iostream>
 #include "book.h"
 
 class Library{
@@ -13,6 +15,7 @@ class Library{
         void returnABook();
         void displayBooks();
         void severalBooks(std::vector <std::string> *titlesList);
+        void loadToLibrary(std::fstream &inOutFile);
 };
 
 #endif

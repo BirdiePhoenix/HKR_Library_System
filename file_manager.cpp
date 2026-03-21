@@ -1,8 +1,8 @@
 #include "file_manager.h"
 #include <iostream>
+#include <string>
 
-void checkIfOpen(){
-    std::fstream inOutFile("library.txt", std::ios::in | std::ios::out);
+void checkIfOpen(std::fstream &inOutFile){
 
     if(!inOutFile)
         std::cout << "Failed to open library.txt for reading" << std::endl;
