@@ -6,4 +6,12 @@ void checkIfOpen(){
 
     if(!inOutFile)
         std::cout << "Failed to open library.txt for reading" << std::endl;
+
+    if(inOutFile.is_open()){
+        std::cout << "is_open() flag got triggered" << std::endl;
+        inOutFile.close();
+    }
+    else{
+        std::cerr << "Error opening file" << std::endl;
+    }
 }
