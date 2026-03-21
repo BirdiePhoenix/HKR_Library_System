@@ -3,8 +3,10 @@
 #include "error_handling.h"
 #include "book.h"
 #include "library.h"
+#include "file_manager.h"
 
 int main(){
+    checkIfOpen();
     std::vector <Book> libraryList;
     Library myLibrary(libraryList);
     int menuChoice = 0;
