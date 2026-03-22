@@ -168,3 +168,18 @@ void Library::loadToLibrary(std::fstream &inOutFile){
     inOutFile.clear();
     inOutFile.seekg(0);
 }
+
+void Library::saveToFile(std::fstream &inOutFile){
+
+    for(int i = 0; i < mLibrary.size(); i++){
+        inOutFile << mLibrary[i].getTitle() << std::endl;
+        inOutFile << mLibrary[i].getAuthor() << std::endl;
+
+        if(mLibrary[i].getAvailable()){
+            inOutFile << "Yes" << std::endl;
+        }
+        else{
+            inOutFile << "No" << std::endl;
+        }
+    }
+}

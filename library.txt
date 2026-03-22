@@ -1,9 +1,12 @@
 The Hobbit
 Tolkien
-Yes
+No
 Star Wars
 Lucas
-No
+Yes
 Harry Potter
 Rowling
+Yes
+Hunger Games
+Andrea
 Yes

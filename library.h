@@ -16,6 +16,7 @@ class Library{
         void displayBooks();
         void severalBooks(std::vector <std::string> *titlesList);
         void loadToLibrary(std::fstream &inOutFile);
+        void saveToFile(std::fstream &inOutFile);
 };
 
 #endif

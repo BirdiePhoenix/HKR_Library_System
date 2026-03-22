@@ -50,6 +50,7 @@ int main(){
                 break;
         }
     }
+    myLibrary.saveToFile(inOutFile);
     inOutFile.close();
     return 0;
 }
