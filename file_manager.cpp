@@ -9,7 +9,6 @@ void checkIfOpen(std::fstream &inOutFile){
 
     if(inOutFile.is_open()){
         std::cout << "is_open() flag got triggered" << std::endl;
-        inOutFile.close();
     }
     else{
         std::cerr << "Error opening file" << std::endl;

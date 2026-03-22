@@ -50,6 +50,6 @@ int main(){
                 break;
         }
     }
-
+    inOutFile.close();
     return 0;
 }

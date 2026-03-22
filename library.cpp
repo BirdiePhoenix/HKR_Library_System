@@ -139,14 +139,15 @@ void Library::loadToLibrary(std::fstream &inOutFile){
     std::string title;
     std::string author;
     bool isAvailable;
-    int libraryIndex = 0;
-    while(std::getline(inOutFile, line)){
-        int lineCount = 1;
-        
+    int lineCount = 1;
+    std::cout << "Hello" << std::endl;
+
+    while(std::getline(inOutFile, line)){  
+        std::cout << line << std::endl;
         if((lineCount+2)%3 == 0){
             title = line;
         }
-        else if((lineCount+1) == 0){
+        else if((lineCount+1)%3 == 0){
             author = line;
         }
         else if(lineCount%3 == 0){
@@ -156,6 +157,9 @@ void Library::loadToLibrary(std::fstream &inOutFile){
             else if(line == "No"){
                 isAvailable = false;
             }
+
+            Book newBook(title, author, isAvailable);
+            mLibrary.push_back(newBook);
         }
 
         lineCount++;
@@ -163,8 +167,4 @@ void Library::loadToLibrary(std::fstream &inOutFile){
 
     inOutFile.clear();
     inOutFile.seekg(0);
-
-    Book newBook(title, author, isAvailable);
-    
-    mLibrary.push_back(newBook);
 }
