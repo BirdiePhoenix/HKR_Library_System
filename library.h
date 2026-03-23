@@ -8,8 +8,9 @@
 class Library{
     private:
         std::vector <Book> mLibrary;
+        bool mBookExist;
     public:
-        Library(std::vector <Book> library);
+        Library(std::vector <Book> library, bool bookExist);
         void addBook();
         void lendABook();
         void returnABook();
@@ -17,6 +18,8 @@ class Library{
         void severalBooks(std::vector <std::string> *titlesList);
         void loadToLibrary(std::fstream &inOutFile);
         void saveToFile(std::fstream &inOutFile);
+        bool getBookExist();
+        void setBookExist(bool bookExist);
 };
 
 #endif

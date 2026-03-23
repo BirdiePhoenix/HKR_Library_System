@@ -8,7 +8,8 @@
 int main(){
     std::fstream inOutFile("library.txt", std::ios::in | std::ios::out);
     std::vector <Book> libraryList;
-    Library myLibrary(libraryList);
+    bool bookExist = false;
+    Library myLibrary(libraryList, bookExist);
     checkIfOpen(inOutFile);
     myLibrary.loadToLibrary(inOutFile);
     int menuChoice = 0;

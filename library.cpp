@@ -1,14 +1,15 @@
 #include "library.h"
 #include "error_handling.h"
 
-Library::Library(std::vector <Book> library){
+Library::Library(std::vector <Book> library, bool bookExist){
     mLibrary = library;
+    mBookExist = bookExist;
 }
 
 void Library::addBook(){
     std::string title;
     std::string author;
-    bool bookExist = false;
+    setBookExist(false);
     
     clearBuffer();
     
@@ -23,12 +24,12 @@ void Library::addBook(){
     for(int i = 0; i < mLibrary.size(); i++){
         if(mLibrary[i].getTitle() == title && mLibrary[i].getAuthor() == author){
             std::cout << "That book does already exist" << std::endl;
-            bookExist = true;
+            setBookExist(true);
             break;
         }
     }
 
-    if(!bookExist){
+    if(!getBookExist()){
         Book newBook(title, author, true); 
         mLibrary.push_back(newBook);
     }
@@ -65,6 +66,9 @@ void Library::lendABook(){
     else{
         clearBuffer();
         std::string whatTitle;
+        // do{
+
+        // }while();
         std::cout << "What is the book title? ";
         std::getline(std::cin, whatTitle);
 
@@ -192,4 +196,12 @@ void Library::saveToFile(std::fstream &inOutFile){
             inOutFile << "No" << std::endl;
         }
     }
+}
+
+bool Library::getBookExist(){
+    return mBookExist;
+}
+
+void Library::setBookExist(bool bookExist){
+    mBookExist = bookExist;
 }
