@@ -8,6 +8,7 @@ Library::Library(std::vector <Book> library){
 void Library::addBook(){
     std::string title;
     std::string author;
+    bool bookExist = false;
     
     clearBuffer();
     
@@ -19,9 +20,18 @@ void Library::addBook(){
     std::getline(std::cin, author);
     std::cout << title << author << std::endl;
 
-    Book newBook(title, author, true);
-    
-    mLibrary.push_back(newBook);
+    for(int i = 0; i < mLibrary.size(); i++){
+        if(mLibrary[i].getTitle() == title && mLibrary[i].getAuthor() == author){
+            std::cout << "That book does already exist" << std::endl;
+            bookExist = true;
+            break;
+        }
+    }
+
+    if(!bookExist){
+        Book newBook(title, author, true); 
+        mLibrary.push_back(newBook);
+    }
 }
 
 void Library::lendABook(){
