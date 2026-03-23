@@ -1,5 +1,6 @@
 #include "library.h"
 #include "error_handling.h"
+#include <iomanip>
 
 Library::Library(std::vector <Book> library, bool bookExist){
     mLibrary = library;
@@ -160,7 +161,7 @@ void Library::returnABook(){
 }
 
 void Library::displayBooks(){
-    std::cout << "Title     " << "Author     " << "Available" << std::endl;
+    std::cout << std::left << std::setw(20) << "TITLE" << std::right << std::setw(20) << "AUTHOR" << std::setw(20) <<  "AVAILABLE" << std::endl;
         
         for(int i = 0; i < mLibrary.size(); i++){
             mLibrary[i].displayDetails();

@@ -1,5 +1,6 @@
 #include "book.h"
 #include <iostream>
+#include <iomanip>
 
 Book::Book(std::string title, std::string author, bool isAvailable){
     mTitle = title;
@@ -10,17 +11,17 @@ Book::Book(std::string title, std::string author, bool isAvailable){
 void Book::displayDetails(){
     std::string printAvailable;
 
-    if(mIsAvailable)
+    if(getAvailable())
         printAvailable = "Yes";
     else
         printAvailable = "No";
 
-    std::cout << getTitle() << "     " << getAuthor() << "     " << printAvailable << std::endl;
+    std::cout << std::left << std::setw(20) << getTitle() << std::right << std::setw(20) << getAuthor() << std::setw(20) << printAvailable << std::endl;
 }
 
 void Book::borrowBook(){
-    if(mIsAvailable){
-        mIsAvailable = false;
+    if(getAvailable()){
+        setAvailable(false);
         displayDetails();
     }
     else    
@@ -28,7 +29,7 @@ void Book::borrowBook(){
 }
 
 void Book::returnBook(){
-    mIsAvailable = true;
+    setAvailable(true);
     displayDetails();
 }
 
@@ -42,4 +43,8 @@ std::string Book::getAuthor(){
 
 bool Book::getAvailable(){
     return mIsAvailable;
+}
+
+void Book::setAvailable(bool isAvailable){
+    mIsAvailable = isAvailable;
 }

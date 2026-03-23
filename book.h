@@ -14,5 +14,6 @@ class Book{
         std::string getTitle();
         std::string getAuthor();
         bool getAvailable();
+        void setAvailable(bool isAvailable);
 };
 #endif
