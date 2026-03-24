@@ -10,7 +10,8 @@ class Library{
         std::vector<Book>* mLibrary;
         bool mBookExist;
     public:
-        Library(std::vector<Book>* library, bool bookExist);
+        Library(std::vector<Book> library, bool bookExist);
+        ~Library();
         void addBook();
         void lendABook();
         void returnABook();

@@ -2,9 +2,15 @@
 #include "error_handling.h"
 #include <iomanip>
 
-Library::Library(std::vector<Book>* library, bool bookExist){
-    mLibrary = library;
+Library::Library(std::vector<Book> library, bool bookExist){
+    mLibrary = new std::vector<Book>;
+    *mLibrary = library;
     mBookExist = bookExist;
+}
+
+Library::~Library(){
+    delete mLibrary;
+    std::cout << "Library was deleted";
 }
 
 void Library::addBook(){
