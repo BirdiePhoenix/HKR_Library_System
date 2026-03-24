@@ -2,7 +2,7 @@
 #include "error_handling.h"
 #include <iomanip>
 
-Library::Library(std::vector <Book> library, bool bookExist){
+Library::Library(std::vector<Book>* library, bool bookExist){
     mLibrary = library;
     mBookExist = bookExist;
 }
@@ -22,8 +22,8 @@ void Library::addBook(){
     std::getline(std::cin, author);
     std::cout << title << author << std::endl;
 
-    for(int i = 0; i < mLibrary.size(); i++){
-        if(mLibrary[i].getTitle() == title && mLibrary[i].getAuthor() == author){
+    for(int i = 0; i < mLibrary->size(); i++){
+        if((*mLibrary)[i].getTitle() == title && (*mLibrary)[i].getAuthor() == author){
             std::cout << "That book does already exist" << std::endl;
             setBookExist(true);
             break;
@@ -32,41 +32,35 @@ void Library::addBook(){
 
     if(!getBookExist()){
         Book newBook(title, author, true); 
-        mLibrary.push_back(newBook);
+        mLibrary->push_back(newBook);
     }
 }
 
 void Library::lendABook(){
     clearBuffer();
 
-    int amountOfBooks;
-
-    do{
-        std::cout << "How many books do you want to lend out? ";
-        amountOfBooks = intChecker();
-
-        if(amountOfBooks < 1)
-            std::cout << "Amount of books can't be less than 1." << std::endl;
-
-    }while(amountOfBooks < 1);
+    int amountOfBooks = insertAmountOfBooks(); 
+    Book* pBook; 
 
     if(amountOfBooks > 1){ //Several books
-        std::vector <std::string> titlesList;
-        severalBooks(&titlesList);
-        for(int i = 0; i < titlesList.size(); i++){
-            std::cout << titlesList[i] << std::endl;
+        std::vector<std::string>* titlesList = new std::vector<std::string>;
+        severalBooks(titlesList);
+        for(int i = 0; i < titlesList->size(); i++){
+            std::cout << (*titlesList)[i] << std::endl;
         }
-        for(int i = 0; i < titlesList.size(); i++){
-            for(int j = 0; j < mLibrary.size(); j++){
-                if(titlesList[i] == mLibrary[j].getTitle()){
-                    mLibrary[j].borrowBook();
+        for(int i = 0; i < titlesList->size(); i++){
+            for(int j = 0; j < mLibrary->size(); j++){
+                pBook = &(*mLibrary)[j];
+                if((*titlesList)[i] == pBook->getTitle()){
+                    (*mLibrary)[j].borrowBook();
                     break;
                 }
-                else if(j == mLibrary.size() - 1){
-                    std::cout << titlesList[i] << " does not exist" << std::endl;
+                else if(j == mLibrary->size() - 1){
+                    std::cout << (*titlesList)[i] << " does not exist" << std::endl;
                 }
             }
         }
+        delete titlesList;
     }
     else{ //One book
         clearBuffer();
@@ -79,21 +73,14 @@ void Library::lendABook(){
             if(whatTitle == "Exit"){
                 break;
             }
-
-            for(int i = 0; i < mLibrary.size(); i++){
-                if(mLibrary[i].getTitle() == whatTitle){
-                    setBookExist(true);
-                    break;
-                }
-            }
-            if(!getBookExist()){
-                std::cout << "The book does not exist" << std::endl;
-            }
+            
+            checkIfBookExist(&whatTitle);
         }while(!getBookExist());
 
-        for(int i = 0; i <= mLibrary.size() - 1; i++){
-            if(whatTitle == mLibrary[i].getTitle()){
-                mLibrary[i].borrowBook();
+        for(int i = 0; i <= mLibrary->size() - 1; i++){
+            pBook = &(*mLibrary)[i];
+            if(whatTitle == pBook->getTitle()){
+                pBook->borrowBook();
             }
         }
     }
@@ -102,31 +89,25 @@ void Library::lendABook(){
 void Library::returnABook(){
     clearBuffer();
         
-    int amountOfBooks;
-
-    do{
-        std::cout << "How many books do you want to return? ";
-        amountOfBooks = intChecker();
-
-        if(amountOfBooks < 1)
-            std::cout << "Amount of books can't be less than 1." << std::endl;
-
-    }while(amountOfBooks < 1);
+    int amountOfBooks = insertAmountOfBooks();   
+    Book* pBook;  
 
     if(amountOfBooks > 1){ //Several Books
-        std::vector <std::string> titlesList;
-        severalBooks(&titlesList);
-        for(int i = 0; i < titlesList.size(); i++){
-            for(int j = 0; j < mLibrary.size(); j++){
-                if(titlesList[i] == mLibrary[j].getTitle()){
-                    mLibrary[j].returnBook();
+        std::vector<std::string>* titlesList = new std::vector<std::string>;
+        severalBooks(titlesList);
+        for(int i = 0; i < titlesList->size(); i++){
+            for(int j = 0; j < mLibrary->size(); j++){
+                pBook = &(*mLibrary)[j];
+                if((*titlesList)[i] == pBook->getTitle()){
+                    pBook->returnBook();
                     break;
                 }
-                else if(j == mLibrary.size() - 1){
-                    std::cout << titlesList[i] << " does not exist" << std::endl;
+                else if(j == (*mLibrary).size() - 1){
+                    std::cout << (*titlesList)[i] << " does not exist" << std::endl;
                 }
             }
         }
+        delete titlesList;
     }
     else{ //One Book
         clearBuffer();
@@ -140,32 +121,16 @@ void Library::returnABook(){
                 break;
             }
 
-            for(int i = 0; i < mLibrary.size(); i++){
-                if(mLibrary[i].getTitle() == whatTitle){
-                    setBookExist(true);
-                    break;
-                }
-            }
-            if(!getBookExist()){
-                std::cout << "The book does not exist" << std::endl;
-            }
-
+            checkIfBookExist(&whatTitle);
         }while(!getBookExist());
 
-        for(int i = 0; i <= mLibrary.size() - 1; i++){
-            if(whatTitle == mLibrary[i].getTitle()){
-                mLibrary[i].returnBook();
+        for(int i = 0; i <= mLibrary->size() - 1; i++){
+            pBook = &(*mLibrary)[i];
+            if(whatTitle == pBook->getTitle()){
+                pBook->returnBook();
             }
         }
     }
-}
-
-void Library::displayBooks(){
-    std::cout << std::left << std::setw(20) << "TITLE" << std::right << std::setw(20) << "AUTHOR" << std::setw(20) <<  "AVAILABLE" << std::endl;
-        
-        for(int i = 0; i < mLibrary.size(); i++){
-            mLibrary[i].displayDetails();
-        }
 }
 
 void Library::severalBooks(std::vector <std::string> *titlesList){
@@ -184,6 +149,29 @@ void Library::severalBooks(std::vector <std::string> *titlesList){
             titlesList->push_back(sub);
             wordStart = i+1;
         }
+    }
+}
+
+void Library::displayBooks(){
+    std::cout << std::left << std::setw(20) << "TITLE" << std::right << std::setw(20) << "AUTHOR" << std::setw(20) <<  "AVAILABLE" << std::endl;
+        for(int i = 0; i < mLibrary->size(); i++){
+            Book *pBook;
+            pBook = &(*mLibrary)[i];
+            pBook->displayDetails();
+        }
+}
+
+void Library::checkIfBookExist(std::string* whatTitle){
+    Book* pBook;
+    for(int i = 0; i < mLibrary->size(); i++){
+        pBook = &(*mLibrary)[i];
+        if(pBook->getTitle() == *whatTitle){
+            setBookExist(true);
+            break;
+        }
+        }
+        if(!getBookExist()){
+            std::cout << "The book does not exist" << std::endl;
     }
 }
 
@@ -212,7 +200,7 @@ void Library::loadToLibrary(std::fstream &inOutFile){
             }
 
             Book newBook(title, author, isAvailable);
-            mLibrary.push_back(newBook);
+            mLibrary->push_back(newBook);
         }
 
         lineCount++;
@@ -223,19 +211,21 @@ void Library::loadToLibrary(std::fstream &inOutFile){
 }
 
 void Library::saveToFile(std::fstream &inOutFile){
+    Book* pBook;
 
-    for(int i = 0; i < mLibrary.size(); i++){
-        inOutFile << mLibrary[i].getTitle() << std::endl;
-        inOutFile << mLibrary[i].getAuthor() << std::endl;
+    for(int i = 0; i < mLibrary->size(); i++){
+        pBook = &(*mLibrary)[i];
+        inOutFile << pBook->getTitle() << std::endl;
+        inOutFile << pBook->getAuthor() << std::endl;
 
-        if(mLibrary[i].getAvailable()){
+        if((*mLibrary)[i].getAvailable()){
             inOutFile << "Yes";
         }
         else{
             inOutFile << "No";
         }
 
-        if(i < mLibrary.size()-1){
+        if(i < mLibrary->size()-1){
             inOutFile << std::endl;
         }
     }

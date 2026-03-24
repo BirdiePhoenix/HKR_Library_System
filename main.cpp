@@ -7,7 +7,7 @@
 
 int main(){
     std::fstream inOutFile("library.txt", std::ios::in | std::ios::out);
-    std::vector <Book> libraryList;
+    std::vector<Book>* libraryList = new std::vector<Book>;
     bool bookExist = false;
     Library myLibrary(libraryList, bookExist);
     checkIfOpen(inOutFile);
@@ -53,5 +53,6 @@ int main(){
     }
     myLibrary.saveToFile(inOutFile);
     inOutFile.close();
+    delete libraryList;
     return 0;
 }

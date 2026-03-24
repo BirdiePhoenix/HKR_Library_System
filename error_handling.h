@@ -5,5 +5,6 @@
 
 int intChecker();
 void clearBuffer();
+int insertAmountOfBooks();
 
 #endif

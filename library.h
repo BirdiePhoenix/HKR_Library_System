@@ -7,14 +7,15 @@
 
 class Library{
     private:
-        std::vector <Book> mLibrary;
+        std::vector<Book>* mLibrary;
         bool mBookExist;
     public:
-        Library(std::vector <Book> library, bool bookExist);
+        Library(std::vector<Book>* library, bool bookExist);
         void addBook();
         void lendABook();
         void returnABook();
         void displayBooks();
+        void checkIfBookExist(std::string* whatTitle);
         void severalBooks(std::vector <std::string> *titlesList);
         void loadToLibrary(std::fstream &inOutFile);
         void saveToFile(std::fstream &inOutFile);

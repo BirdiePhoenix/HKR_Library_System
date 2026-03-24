@@ -6,7 +6,7 @@ Lucas
 Yes
 Harry Potter
 Rowling
-Yes
+No
 Hunger Games
 Andrea
-No
+Yes

@@ -14,3 +14,17 @@ int intChecker(){ //Checks if an input is an integer
 void clearBuffer(){
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
+
+int insertAmountOfBooks(){
+    int amountOfBooks;
+    do{
+        std::cout << "How many books do you want to insert? ";
+        amountOfBooks = intChecker();
+
+        if(amountOfBooks < 1)
+            std::cout << "Amount of books can't be less than 1." << std::endl;
+
+    }while(amountOfBooks < 1);
+
+    return amountOfBooks;
+}
