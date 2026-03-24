@@ -2,29 +2,44 @@
 
 int intChecker(){ //Checks if an input is an integer
     int number;
-    while(!(std::cin >> number)){
+    while(!(std::cin >> number)){ //If user doesn't insert int
             std::cerr << "Invalid input. Input an integer." << std::endl;
             std::cin.clear();
-            clearBuffer();
+            ignoreBuffer();
         } 
     return number;
 }
 
 
-void clearBuffer(){
+void ignoreBuffer(){
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-int insertAmountOfBooks(){
+int insertAmountOfBooks(){ //Checks if input is int and if it is more than 0
     int amountOfBooks;
     do{
-        std::cout << "How many books do you want to insert? ";
+        std::cout << "How many books do you want to insert? Insert '0' to go back to main menu. " ;
         amountOfBooks = intChecker();
-
-        if(amountOfBooks < 1)
+        if(amountOfBooks == 0){
+            break;
+        }
+        else if(amountOfBooks < 1)
             std::cout << "Amount of books can't be less than 1." << std::endl;
 
     }while(amountOfBooks < 1);
 
     return amountOfBooks;
+}
+
+void checkIfOpen(std::fstream &inOutFile){ //Checks so the library.txt opens properly
+
+    if(!inOutFile)
+        std::cerr << "Failed to open library.txt for reading" << std::endl;
+
+    if(inOutFile.is_open()){
+        std::cout << "is_open() flag got triggered" << std::endl;
+    }
+    else{
+        std::cerr << "Error opening file" << std::endl;
+    }
 }

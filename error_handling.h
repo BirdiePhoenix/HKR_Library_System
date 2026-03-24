@@ -2,9 +2,11 @@
 #define ERROR_HANDLING_H
 #include <iostream>
 #include <limits>
+#include <fstream>
 
 int intChecker();
-void clearBuffer();
+void ignoreBuffer();
 int insertAmountOfBooks();
+void checkIfOpen(std::fstream &inOutFile);
 
 #endif

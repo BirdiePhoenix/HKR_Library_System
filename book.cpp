@@ -2,7 +2,7 @@
 #include <iostream>
 #include <iomanip>
 
-Book::Book(std::string title, std::string author, bool isAvailable){
+Book::Book(std::string title, std::string author, bool isAvailable){ //Constructor
     mTitle = title;
     mAuthor = author;
     mIsAvailable = isAvailable;
@@ -11,7 +11,7 @@ Book::Book(std::string title, std::string author, bool isAvailable){
 void Book::displayDetails(){
     std::string printAvailable;
 
-    if(getAvailable())
+    if(getAvailable()) //Checks if available and prints yes or no instead of true or false
         printAvailable = "Yes";
     else
         printAvailable = "No";
@@ -22,15 +22,11 @@ void Book::displayDetails(){
 void Book::borrowBook(){
     if(getAvailable()){
         setAvailable(false);
-        displayDetails();
     }
-    else    
-        std::cout << mTitle << " is already borrowed." << std::endl;
 }
 
 void Book::returnBook(){
     setAvailable(true);
-    displayDetails();
 }
 
 std::string Book::getTitle(){

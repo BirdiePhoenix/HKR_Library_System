@@ -3,19 +3,20 @@
 #include "error_handling.h"
 #include "book.h"
 #include "library.h"
-#include "file_manager.h"
 
 int main(){
     std::fstream inOutFile("library.txt", std::ios::in | std::ios::out);
+    checkIfOpen(inOutFile); //In error_handling.cpp, checks if the file got open
+
     std::vector<Book> libraryList;
-    bool bookExist = false;
+    bool bookExist = false; // Used when checking if a book exists in library
     Library myLibrary(libraryList, bookExist);
-    checkIfOpen(inOutFile);
     myLibrary.loadToLibrary(inOutFile);
+
     int menuChoice = 0;
 
     while(menuChoice != 5){
-        std::cout << std::endl << "Main Menu" << std::endl
+        std::cout << "Main Menu" << std::endl
         << "1. Add a new book" << std::endl
         << "2. Lend books" << std::endl
         << "3. Return books" << std::endl
@@ -24,12 +25,14 @@ int main(){
 
         do{
             std::cout << "Choice: ";
-            menuChoice = intChecker(); //In error_handling.cpp
+            menuChoice = intChecker(); //In error_handling.cpp, checks so user input int
     
             if(menuChoice < 1 || menuChoice > 5)
                 std::cout << "Choose 1-5"<< std::endl;
                 
         }while (menuChoice < 1 || menuChoice > 5);
+
+        std::cout << "***********" << std::endl << std::endl;
 
         switch(menuChoice){
             case 1:
@@ -50,6 +53,8 @@ int main(){
             default:
                 break;
         }
+
+        std::cout << std::endl << std::endl << "***********"  << std::endl;
     }
     myLibrary.saveToFile(inOutFile);
     inOutFile.close();

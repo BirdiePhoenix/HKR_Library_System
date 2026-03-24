@@ -17,7 +17,7 @@ class Library{
         void returnABook();
         void displayBooks();
         void checkIfBookExist(std::string* whatTitle);
-        void severalBooks(std::vector <std::string> *titlesList);
+        void severalBooks(std::vector <std::string> *titlesList, int amountOfBooks);
         void loadToLibrary(std::fstream &inOutFile);
         void saveToFile(std::fstream &inOutFile);
         bool getBookExist();
