@@ -23,7 +23,7 @@ int main(){
         << "4. View available books" << std::endl
         << "5. Exit" << std::endl << std::endl;
 
-        mainMenuChoice(&menuChoice);
+        mainMenuChoice(&menuChoice); //In error_handling.cpp, for validating the right input
 
         std::cout << "***********" << std::endl << std::endl;
 

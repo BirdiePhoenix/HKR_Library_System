@@ -45,11 +45,11 @@ void checkIfOpen(std::fstream &inOutFile){ //Checks so the library.txt opens pro
 
 void mainMenuChoice(int* menuChoice){
     do{
-            std::cout << "Choice: ";
-            *menuChoice = intChecker(); //In error_handling.cpp, checks so user input int
-    
-            if(*menuChoice < 1 || *menuChoice > 5)
-                std::cout << "Choose 1-5"<< std::endl;
-                
-        }while (*menuChoice < 1 || *menuChoice > 5);
+        std::cout << "Choice: ";
+        *menuChoice = intChecker(); //In error_handling.cpp, checks so user inputs int
+
+        if(*menuChoice < 1 || *menuChoice > 5)
+            std::cout << "Choose 1-5"<< std::endl;
+            
+    }while (*menuChoice < 1 || *menuChoice > 5);
 }
