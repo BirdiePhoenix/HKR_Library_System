@@ -3,7 +3,7 @@ Tolkien
 Yes
 Star Wars
 Lucas
-Yes
+ No
 Harry Potter
 Rowling
-Yes
+ No

@@ -18,6 +18,7 @@ void Library::addBook(){ //Adds books to the library
     std::string title;
     std::string author;
     setBookExist(false);
+    Book* pBook;
 
     std::cout << "ADD BOOKS" << std::endl << std::endl;
 
@@ -32,7 +33,8 @@ void Library::addBook(){ //Adds books to the library
     std::getline(std::cin, author);
 
     for(int i = 0; i < mLibrary->size(); i++){
-        if((*mLibrary)[i].getTitle() == title && (*mLibrary)[i].getAuthor() == author){
+        pBook = &(*mLibrary)[i];
+        if(pBook->getTitle() == title && pBook->getAuthor() == author){
             std::cout << "That book does already exist" << std::endl;
             setBookExist(true);
             break;
@@ -165,31 +167,18 @@ void Library::severalBooks(std::vector <std::string> *titlesList, int amountOfBo
     for(int i = 0; i < amountOfBooks; i++){
         std::cout << "Insert book title " << i+1 << std::endl;
         std::getline(std::cin, bookTitle);
-        ss << bookTitle << ';';
-    }
-
-    std::string allTitles = ss.str();
-
-    int listIndex = 0;
-    int wordStart = 0;
-
-    for(int i = 0; i < allTitles.length(); i++){ //Loops through the file and add the book titles to titlesList[]
-        if(allTitles[i] == ';' || i == allTitles.length() - 1){
-            std::string sub = allTitles.substr(wordStart, i-wordStart);
-            titlesList->push_back(sub);
-            wordStart = i+1;
-        }
+        titlesList->push_back(bookTitle);
     }
 }
 
 void Library::displayBooks(){ //Displays the books in library
     std::cout << "DISPLAY BOOKS" << std::endl << std::endl;
     std::cout << std::left << std::setw(20) << "TITLE" << std::right << std::setw(20) << "AUTHOR" << std::setw(20) <<  "AVAILABLE" << std::endl;
-        for(int i = 0; i < mLibrary->size(); i++){
-            Book *pBook;
-            pBook = &(*mLibrary)[i];
-            pBook->displayDetails();
-        }
+    for(int i = 0; i < mLibrary->size(); i++){
+        Book *pBook;
+        pBook = &(*mLibrary)[i];
+        pBook->displayDetails();
+    }
 }
 
 void Library::checkIfBookExist(std::string* whatTitle){ //Checks if a book exists in the library
