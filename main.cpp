@@ -23,14 +23,7 @@ int main(){
         << "4. View available books" << std::endl
         << "5. Exit" << std::endl << std::endl;
 
-        do{
-            std::cout << "Choice: ";
-            menuChoice = intChecker(); //In error_handling.cpp, checks so user input int
-    
-            if(menuChoice < 1 || menuChoice > 5)
-                std::cout << "Choose 1-5"<< std::endl;
-                
-        }while (menuChoice < 1 || menuChoice > 5);
+        mainMenuChoice(&menuChoice);
 
         std::cout << "***********" << std::endl << std::endl;
 

@@ -10,7 +10,6 @@ int intChecker(){ //Checks if an input is an integer
     return number;
 }
 
-
 void ignoreBuffer(){
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
@@ -42,4 +41,15 @@ void checkIfOpen(std::fstream &inOutFile){ //Checks so the library.txt opens pro
     else{
         std::cerr << "Error opening file" << std::endl;
     }
+}
+
+void mainMenuChoice(int* menuChoice){
+    do{
+            std::cout << "Choice: ";
+            *menuChoice = intChecker(); //In error_handling.cpp, checks so user input int
+    
+            if(*menuChoice < 1 || *menuChoice > 5)
+                std::cout << "Choose 1-5"<< std::endl;
+                
+        }while (*menuChoice < 1 || *menuChoice > 5);
 }
