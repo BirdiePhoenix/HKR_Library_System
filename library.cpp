@@ -58,9 +58,9 @@ void Library::lendABook(){ //Lends out books
     if(amountOfBooks == 0){
         return;
     }
-    else if(amountOfBooks > 1){ //Several books
+    else{ //Several books
         std::vector<std::string>* titlesList = new std::vector<std::string>; //Stores the list of books the user input
-        severalBooks(titlesList, amountOfBooks); //In library.cpp
+        insertBooks(titlesList, amountOfBooks); //In library.cpp
         
         for(int i = 0; i < titlesList->size(); i++){ //Loops through the titleList[] and checks if the book is in library
             for(int j = 0; j < mLibrary->size(); j++){
@@ -81,33 +81,6 @@ void Library::lendABook(){ //Lends out books
         }
         delete titlesList;
     }
-    else{ //One book
-        ignoreBuffer();
-        std::string whatTitle;
-        setBookExist(false);
-        do{
-            std::cout << "What book do you want to lend out? ";
-            std::getline(std::cin, whatTitle);
-            
-            checkIfBookExist(&whatTitle); //In library.cpp
-        }while(!getBookExist());
-
-        for(int i = 0; i <= mLibrary->size() - 1; i++){
-            pBook = &(*mLibrary)[i];
-            if(whatTitle == pBook->getTitle() && pBook->getAvailable() == true){
-                pBook->borrowBook();
-                std::cout << pBook->getTitle() << " by " << pBook->getAuthor() << " was borrowed." << std::endl;
-                break;
-            }
-            else if(whatTitle == pBook->getTitle() && pBook->getAvailable() == false){
-                std::cout << pBook->getTitle() << " is already borrowed." << std::endl;
-                break;
-            }
-            else if(i == (*mLibrary).size() - 1){
-                std::cout << whatTitle << " does not exist" << std::endl;
-            }
-        }
-    }
 }
 
 void Library::returnABook(){ //Returns books
@@ -120,9 +93,9 @@ void Library::returnABook(){ //Returns books
     if(amountOfBooks == 0){
         return;
     }
-    else if(amountOfBooks > 1){ //Several Books
+    else{ //Several Books
         std::vector<std::string>* titlesList = new std::vector<std::string>;
-        severalBooks(titlesList, amountOfBooks);
+        insertBooks(titlesList, amountOfBooks);
         for(int i = 0; i < titlesList->size(); i++){
             for(int j = 0; j < mLibrary->size(); j++){
                 pBook = &(*mLibrary)[j];
@@ -138,31 +111,9 @@ void Library::returnABook(){ //Returns books
         }
         delete titlesList;
     }
-    else{ //One Book
-        ignoreBuffer();
-        std::string whatTitle;
-        setBookExist(false);
-        do{
-            std::cout << "What book do you want to return? ";
-            std::getline(std::cin, whatTitle);
-            checkIfBookExist(&whatTitle);
-        }while(!getBookExist());
-
-        for(int i = 0; i <= mLibrary->size() - 1; i++){
-            pBook = &(*mLibrary)[i];
-            if(whatTitle == pBook->getTitle()){
-                pBook->returnBook();
-                std::cout << pBook->getTitle() << " by " << pBook->getAuthor() << " was returned." << std::endl;
-                break;
-            }
-            else if(i == (*mLibrary).size() - 1){
-                std::cout << whatTitle << " does not exist" << std::endl;
-            }
-        }
-    }
 }
 
-void Library::severalBooks(std::vector <std::string> *titlesList, int amountOfBooks){ //Handles if multiple books is lended or borrowed
+void Library::insertBooks(std::vector <std::string> *titlesList, int amountOfBooks){ //Handles if multiple books is lended or borrowed
     ignoreBuffer();
     std::string bookTitle;
     for(int i = 0; i < amountOfBooks; i++){
