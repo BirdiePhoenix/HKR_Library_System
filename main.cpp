@@ -32,10 +32,10 @@ int main(){
                 myLibrary.addBook();
                 break;
             case 2:
-                myLibrary.lendABook();
+                myLibrary.lendBooks();
                 break;
             case 3:
-                myLibrary.returnABook();
+                myLibrary.returnBooks();
                 break;
             case 4:
                 myLibrary.displayBooks();

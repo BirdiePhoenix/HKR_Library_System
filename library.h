@@ -13,8 +13,8 @@ class Library{
         Library(std::vector<Book> library, bool bookExist);
         ~Library();
         void addBook();
-        void lendABook();
-        void returnABook();
+        void lendBooks();
+        void returnBooks();
         void displayBooks();
         void checkIfBookExist(std::string* whatTitle);
         void insertBooks(std::vector <std::string> *titlesList, int amountOfBooks);

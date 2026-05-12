@@ -48,7 +48,7 @@ void Library::addBook(){ //Adds books to the library
     }
 }
 
-void Library::lendABook(){ //Lends out books
+void Library::lendBooks(){ //Lends out books
     ignoreBuffer();
     std::cout << "LEND OUT BOOKS" << std::endl << std::endl;
     int amountOfBooks;
@@ -83,7 +83,7 @@ void Library::lendABook(){ //Lends out books
     }
 }
 
-void Library::returnABook(){ //Returns books
+void Library::returnBooks(){ //Returns books
     ignoreBuffer();  
     std::cout << "RETURN BOOKS" << std::endl << std::endl;
     int amountOfBooks;
