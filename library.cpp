@@ -51,7 +51,8 @@ void Library::addBook(){ //Adds books to the library
 void Library::lendABook(){ //Lends out books
     ignoreBuffer();
     std::cout << "LEND OUT BOOKS" << std::endl << std::endl;
-    int amountOfBooks = insertAmountOfBooks(); //In error_handling.cpp, checks so input is correct
+    int amountOfBooks;
+    insertAmountOfBooks(&amountOfBooks); //In error_handling.cpp, checks so input is correct
     Book* pBook; //A pointer to the Book objects
 
     if(amountOfBooks == 0){
@@ -112,7 +113,8 @@ void Library::lendABook(){ //Lends out books
 void Library::returnABook(){ //Returns books
     ignoreBuffer();  
     std::cout << "RETURN BOOKS" << std::endl << std::endl;
-    int amountOfBooks = insertAmountOfBooks();   
+    int amountOfBooks;
+    insertAmountOfBooks(&amountOfBooks);
     Book* pBook;  
 
     if(amountOfBooks == 0){
@@ -163,7 +165,6 @@ void Library::returnABook(){ //Returns books
 void Library::severalBooks(std::vector <std::string> *titlesList, int amountOfBooks){ //Handles if multiple books is lended or borrowed
     ignoreBuffer();
     std::string bookTitle;
-    std::stringstream ss;
     for(int i = 0; i < amountOfBooks; i++){
         std::cout << "Insert book title " << i+1 << std::endl;
         std::getline(std::cin, bookTitle);

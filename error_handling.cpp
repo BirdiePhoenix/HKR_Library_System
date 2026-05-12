@@ -10,25 +10,34 @@ int intChecker(){ //Checks if an input is an integer
     return number;
 }
 
+void insertAmountOfBooks(int* amountOfBooksPtr){ //Checks if input is int and if it is more than 0
+    do{
+        std::cout << "How many books do you want to insert? Insert '0' to go back to main menu. " ;
+        *amountOfBooksPtr = intChecker();
+        if(*amountOfBooksPtr == 0){
+            break;
+        }
+        else if(*amountOfBooksPtr < 1)
+            std::cout << "Amount of books can't be less than 1." << std::endl;
+
+    }while(*amountOfBooksPtr < 1);
+}
+
+void mainMenuChoice(int* menuChoicePtr){ //Checks if input is int and if it is between 1-5
+    do{
+        std::cout << "Choice: ";
+        *menuChoicePtr = intChecker(); //In error_handling.cpp, checks so user inputs int
+
+        if(*menuChoicePtr < 1 || *menuChoicePtr > 5)
+            std::cout << "Choose 1-5"<< std::endl;
+            
+    }while (*menuChoicePtr < 1 || *menuChoicePtr > 5);
+}
+
 void ignoreBuffer(){
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-int insertAmountOfBooks(){ //Checks if input is int and if it is more than 0
-    int amountOfBooks;
-    do{
-        std::cout << "How many books do you want to insert? Insert '0' to go back to main menu. " ;
-        amountOfBooks = intChecker();
-        if(amountOfBooks == 0){
-            break;
-        }
-        else if(amountOfBooks < 1)
-            std::cout << "Amount of books can't be less than 1." << std::endl;
-
-    }while(amountOfBooks < 1);
-
-    return amountOfBooks;
-}
 
 void checkIfOpen(std::fstream &inOutFile){ //Checks so the library.txt opens properly
 
@@ -41,15 +50,4 @@ void checkIfOpen(std::fstream &inOutFile){ //Checks so the library.txt opens pro
     else{
         std::cerr << "Error opening file" << std::endl;
     }
-}
-
-void mainMenuChoice(int* menuChoice){
-    do{
-        std::cout << "Choice: ";
-        *menuChoice = intChecker(); //In error_handling.cpp, checks so user inputs int
-
-        if(*menuChoice < 1 || *menuChoice > 5)
-            std::cout << "Choose 1-5"<< std::endl;
-            
-    }while (*menuChoice < 1 || *menuChoice > 5);
 }

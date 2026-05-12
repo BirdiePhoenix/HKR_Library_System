@@ -6,8 +6,8 @@
 
 int intChecker();
 void ignoreBuffer();
-int insertAmountOfBooks();
+void insertAmountOfBooks(int* amountOfBooksPtr);
 void checkIfOpen(std::fstream &inOutFile);
-void mainMenuChoice(int* menuChoice);
+void mainMenuChoice(int* menuChoicePtr);
 
 #endif
